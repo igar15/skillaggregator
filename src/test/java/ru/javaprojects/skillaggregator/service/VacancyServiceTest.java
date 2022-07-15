@@ -75,36 +75,36 @@ class VacancyServiceTest {
 
     @Test
     void getVacancyIdsWhenSelectionEqualsToAvailablePages() {
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE), VACANCIES_PAGE_FIRST_JSON_DATA);
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, SECOND_PAGE), VACANCIES_PAGE_SECOND_JSON_DATA);
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, THIRD_PAGE), VACANCIES_PAGE_THIRD_JSON_DATA);
-        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, THREE_PAGE_AMOUNT);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE_NUMBER), VACANCIES_PAGE_FIRST_JSON_DATA);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, SECOND_PAGE_NUMBER), VACANCIES_PAGE_SECOND_JSON_DATA);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, THIRD_PAGE_NUMBER), VACANCIES_PAGE_THIRD_JSON_DATA);
+        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, THREE_PAGES);
         mockServer.verify();
         assertEquals(Set.of(VACANCY_1_ID, VACANCY_2_ID, VACANCY_3_ID, VACANCY_4_ID, VACANCY_5_ID), vacancyIds);
     }
 
     @Test
     void getVacancyIdsWhenSelectionLessThanAvailablePages() {
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE), VACANCIES_PAGE_FIRST_JSON_DATA);
-        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, ONE_PAGE_AMOUNT);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE_NUMBER), VACANCIES_PAGE_FIRST_JSON_DATA);
+        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, ONE_PAGE);
         mockServer.verify();
         assertEquals(Set.of(VACANCY_1_ID, VACANCY_2_ID), vacancyIds);
     }
 
     @Test
     void getVacancyIdsWhenSelectionMoreThanAvailablePages() {
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE), VACANCIES_PAGE_FIRST_JSON_DATA);
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, SECOND_PAGE), VACANCIES_PAGE_SECOND_JSON_DATA);
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, THIRD_PAGE), VACANCIES_PAGE_THIRD_JSON_DATA);
-        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGE_AMOUNT);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE_NUMBER), VACANCIES_PAGE_FIRST_JSON_DATA);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, SECOND_PAGE_NUMBER), VACANCIES_PAGE_SECOND_JSON_DATA);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, THIRD_PAGE_NUMBER), VACANCIES_PAGE_THIRD_JSON_DATA);
+        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGES);
         mockServer.verify();
         assertEquals(Set.of(VACANCY_1_ID, VACANCY_2_ID, VACANCY_3_ID, VACANCY_4_ID, VACANCY_5_ID), vacancyIds);
     }
 
     @Test
     void getVacancyIdsWhenVacanciesNotFound() {
-        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE), VACANCIES_PAGE_WITHOUT_VACANCIES);
-        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGE_AMOUNT);
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE_NUMBER), VACANCIES_PAGE_WITHOUT_VACANCIES);
+        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGES);
         mockServer.verify();
         assertEquals(Collections.emptySet(), vacancyIds);
     }
@@ -112,11 +112,11 @@ class VacancyServiceTest {
     @Test
     void getVacancyIdsWhenServerUnavailable() {
         mockServer.expect(ExpectedCount.once(),
-                MockRestRequestMatchers.requestTo(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE)))
+                MockRestRequestMatchers.requestTo(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE_NUMBER)))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.SERVICE_UNAVAILABLE)
                 );
-        assertThrows(HttpServerErrorException.class, () -> vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGE_AMOUNT));
+        assertThrows(HttpServerErrorException.class, () -> vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGES));
         mockServer.verify();
     }
 

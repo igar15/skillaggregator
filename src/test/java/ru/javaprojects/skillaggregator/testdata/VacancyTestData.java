@@ -26,12 +26,12 @@ public class VacancyTestData {
 
     public static final String PROFESSION_NAME = "worker";
     public static final String CITY = "moscow";
-    public static final int FIRST_PAGE = 0;
-    public static final int SECOND_PAGE = 1;
-    public static final int THIRD_PAGE = 2;
-    public static final int ONE_PAGE_AMOUNT = 1;
-    public static final int THREE_PAGE_AMOUNT = 3;
-    public static final int FIVE_PAGE_AMOUNT = 5;
+    public static final int FIRST_PAGE_NUMBER = 0;
+    public static final int SECOND_PAGE_NUMBER = 1;
+    public static final int THIRD_PAGE_NUMBER = 2;
+    public static final int ONE_PAGE = 1;
+    public static final int THREE_PAGES = 3;
+    public static final int FIVE_PAGES = 5;
     public static final String VACANCY_1_ID = "0001";
     public static final String VACANCY_2_ID = "0002";
     public static final String VACANCY_3_ID = "0003";
@@ -80,4 +80,10 @@ public class VacancyTestData {
             "  \"per_page\": \"100\"," +
             "  \"items\": []\n" +
             "}";
+
+    public static final Set<String> VACANCY_1_KEY_SKILLS = Set.of("LEADING", "SALES", "MANAGEMENT", "ENGLISH");
+    public static final Set<String> VACANCY_2_KEY_SKILLS = Set.of("LEADING", "SALES", "MANAGEMENT", "ENGLISH");
+    public static final Set<String> VACANCY_3_KEY_SKILLS = Set.of("LEADING", "SALES", "MANAGEMENT", "GERMAN");
+    public static final Set<String> VACANCY_4_KEY_SKILLS = Set.of("LEADING", "SALES", "MANAGEMENT");
+    public static final Set<String> VACANCY_5_KEY_SKILLS = Set.of("LEADING", "MATH");
 }

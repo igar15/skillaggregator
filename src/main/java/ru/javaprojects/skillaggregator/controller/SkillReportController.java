@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javaprojects.skillaggregator.model.Selection;
+import ru.javaprojects.skillaggregator.model.SkillReport;
 import ru.javaprojects.skillaggregator.service.SkillReportService;
 import ru.javaprojects.skillaggregator.service.VacancyService;
 
@@ -19,9 +20,9 @@ public class SkillReportController {
     private VacancyService vacancyService;
 
     @GetMapping("/test")
-    public void test(@RequestParam("professionName") String professionName, @RequestParam("city") String city,
-                     @RequestParam("selection") Selection selection) {
-        skillReportService.getSkillReportForToday(professionName, city, selection);
+    public SkillReport test(@RequestParam("professionName") String professionName, @RequestParam("city") String city,
+                            @RequestParam("selection") Selection selection) {
+        return skillReportService.getSkillReportForToday(professionName, city, selection);
     }
 
     @GetMapping("/notfound/{id}")

@@ -1,11 +1,13 @@
 package ru.javaprojects.skillaggregator.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,8 +16,11 @@ public class VacancyService {
     public static final String VACANCY_INFO_URL_PATTERN = "https://api.hh.ru/vacancies/%s";
     public static final int FIRST_PAGE = 0;
 
-    @Autowired
     private RestTemplate restTemplate;
+
+    public VacancyService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public Set<String> getVacancyIds(String professionName, String city, int pageAmount) {
         VacanciesPage vacanciesPage = restTemplate.getForObject(String.format(VACANCIES_PAGE_URL_PATTERN, professionName, city, FIRST_PAGE), VacanciesPage.class);
