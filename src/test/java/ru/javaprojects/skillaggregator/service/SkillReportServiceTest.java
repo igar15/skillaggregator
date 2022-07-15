@@ -18,7 +18,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100_VACANCIES;
+import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100;
 import static ru.javaprojects.skillaggregator.testdata.SkillReportTestData.*;
 import static ru.javaprojects.skillaggregator.testdata.VacancyTestData.*;
 
@@ -38,7 +38,7 @@ class SkillReportServiceTest {
 
     @Test
     void getSkillReportForTodayWhenFoundInDb() {
-        SkillReport dbSkillReport = service.getSkillReportForToday(JAVA_PROFESSION_NAME, MOSCOW_CITY, FIRST_100_VACANCIES);
+        SkillReport dbSkillReport = service.getSkillReportForToday(JAVA_PROFESSION_NAME, MOSCOW_CITY, FIRST_100);
         assertThat(dbSkillReport).usingRecursiveComparison().isEqualTo(javaSkillReport);
     }
 
@@ -51,7 +51,7 @@ class SkillReportServiceTest {
         Mockito.when(vacancyService.getKeySkills(VACANCY_3_ID)).thenReturn(VACANCY_3_KEY_SKILLS);
         Mockito.when(vacancyService.getKeySkills(VACANCY_4_ID)).thenReturn(VACANCY_4_KEY_SKILLS);
         Mockito.when(vacancyService.getKeySkills(VACANCY_5_ID)).thenReturn(VACANCY_5_KEY_SKILLS);
-        SkillReport skillReport = service.getSkillReportForToday(MANAGER_PROFESSION_NAME, MOSCOW_CITY, FIRST_100_VACANCIES);
+        SkillReport skillReport = service.getSkillReportForToday(MANAGER_PROFESSION_NAME, MOSCOW_CITY, FIRST_100);
         assertThat(skillReport).usingRecursiveComparison().ignoringFields("id").isEqualTo(managerSkillReport);
     }
 
@@ -60,7 +60,7 @@ class SkillReportServiceTest {
         Mockito.when(vacancyService.getVacancyIds(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, ONE_PAGE))
                 .thenReturn(Collections.emptySet());
         assertThrows(VacanciesNotFoundException.class,
-                () -> service.getSkillReportForToday(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, FIRST_100_VACANCIES));
+                () -> service.getSkillReportForToday(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, FIRST_100));
     }
 
     @Test
@@ -71,9 +71,9 @@ class SkillReportServiceTest {
 
     @Test
     void deleteSkillReportForToday() {
-        service.deleteSkillReportForToday(JAVA_PROFESSION_NAME, MOSCOW_CITY, FIRST_100_VACANCIES);
+        service.deleteSkillReportForToday(JAVA_PROFESSION_NAME, MOSCOW_CITY, FIRST_100);
         assertFalse(repository.findByProfessionNameAndCityAndDateAndSelection(JAVA_PROFESSION_NAME, MOSCOW_CITY,
-                LocalDate.now(), FIRST_100_VACANCIES).isPresent());
+                LocalDate.now(), FIRST_100).isPresent());
     }
 
     @Test

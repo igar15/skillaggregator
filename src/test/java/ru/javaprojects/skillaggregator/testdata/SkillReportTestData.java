@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100_VACANCIES;
+import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100;
 
 public class SkillReportTestData {
     public static final String JAVA_PROFESSION_NAME = "JAVA";
@@ -34,14 +34,14 @@ public class SkillReportTestData {
         Map<String, Integer> javaSkillReportSkillCounter = Map.of("JAVA", 100, "ENGLISH", 25, "SPRING", 90, "HIBERNATE", 70,
                 "SQL", 50, "DOCKER", 10);
         javaSkillReport = new SkillReport(JAVA_SKILL_REPORT_ID, JAVA_PROFESSION_NAME, MOSCOW_CITY, LocalDate.now(), VACANCIES_AMOUNT,
-                javaSkillReportSkillCounter, FIRST_100_VACANCIES);
+                javaSkillReportSkillCounter, FIRST_100);
         Map<String, Integer> sellerSkillReportSkillCounter = Map.of("SALES", 80, "POLITENESS", 70, "ARITHMETIC", 20);
         sellerSkillReport = new SkillReport(SELLER_SKILL_REPORT_ID, SELLER_PROFESSION_NAME, LONDON_CITY, LocalDate.now(), VACANCIES_AMOUNT,
-                sellerSkillReportSkillCounter, FIRST_100_VACANCIES);
+                sellerSkillReportSkillCounter, FIRST_100);
         Map<String, Integer> managerSkillReportSkillCounter = Map.of("LEADING", 5, "SALES", 4, "MANAGEMENT", 4,
                 "ENGLISH", 2, "GERMAN", 1, "MATH", 1);
         managerSkillReport = new SkillReport(MANAGER_PROFESSION_NAME, MOSCOW_CITY, MANAGER_VACANCIES_AMOUNT,
-                managerSkillReportSkillCounter, FIRST_100_VACANCIES);
+                managerSkillReportSkillCounter, FIRST_100);
     }
 
     private static void createSkillReportTo() {
@@ -52,7 +52,7 @@ public class SkillReportTestData {
         javaSkillStatistic.put("SQL", 50);
         javaSkillStatistic.put("ENGLISH", 25);
         javaSkillStatistic.put("DOCKER", 10);
-        javaSkillReportTo = new SkillReportTo(JAVA_PROFESSION_NAME, MOSCOW_CITY, LocalDate.now(), VACANCIES_AMOUNT,
-                FIRST_100_VACANCIES, javaSkillStatistic);
+        javaSkillReportTo = new SkillReportTo("Java", "Moscow", LocalDate.now(), VACANCIES_AMOUNT,
+                FIRST_100.getDescription(), javaSkillStatistic);
     }
 }

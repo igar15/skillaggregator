@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100_VACANCIES;
+import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100;
 
 @Entity
 @Table(name = "skill_reports", uniqueConstraints = {@UniqueConstraint(columnNames = {"profession_name", "city", "date",
@@ -44,7 +44,7 @@ public class SkillReport implements Serializable {
 
     @Column(name = "selection")
     @Enumerated(EnumType.STRING)
-    private Selection selection = FIRST_100_VACANCIES;
+    private Selection selection = FIRST_100;
 
     public SkillReport() {
     }

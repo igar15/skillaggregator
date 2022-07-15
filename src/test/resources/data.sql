@@ -3,8 +3,8 @@ DELETE FROM skill_reports;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO skill_reports (profession_name, city, analyzed_vacancies_amount, selection)
-VALUES ('JAVA', 'MOSCOW', 100, 'FIRST_100_VACANCIES'),
-       ('SELLER', 'LONDON', 100, 'FIRST_100_VACANCIES');
+VALUES ('JAVA', 'MOSCOW', 100, 'FIRST_100'),
+       ('SELLER', 'LONDON', 100, 'FIRST_100');
 
 INSERT INTO skills (skill_report_id, skill_name, skill_counter)
 VALUES (100000, 'JAVA', 100),

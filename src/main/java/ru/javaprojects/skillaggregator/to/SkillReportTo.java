@@ -1,8 +1,6 @@
 package ru.javaprojects.skillaggregator.to;
 
 
-import ru.javaprojects.skillaggregator.model.Selection;
-
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -11,11 +9,11 @@ public class SkillReportTo {
     private String city;
     private LocalDate date;
     private int analyzedVacanciesAmount;
-    private Selection selection;
+    private String selection;
     private Map<String, Integer> skillStatistic;
 
     public SkillReportTo(String professionName, String city, LocalDate date, int analyzedVacanciesAmount,
-                         Selection selection, Map<String, Integer> skillStatistic) {
+                         String selection, Map<String, Integer> skillStatistic) {
         this.professionName = professionName;
         this.city = city;
         this.date = date;
@@ -56,11 +54,11 @@ public class SkillReportTo {
         this.analyzedVacanciesAmount = analyzedVacanciesAmount;
     }
 
-    public Selection getSelection() {
+    public String getSelection() {
         return selection;
     }
 
-    public void setSelection(Selection selection) {
+    public void setSelection(String selection) {
         this.selection = selection;
     }
 

@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javaprojects.skillaggregator.model.Selection;
 import ru.javaprojects.skillaggregator.model.SkillReport;
 import ru.javaprojects.skillaggregator.service.SkillReportService;
 import ru.javaprojects.skillaggregator.service.VacancyService;
+import ru.javaprojects.skillaggregator.to.SkillReportTo;
+import ru.javaprojects.skillaggregator.util.SkillReportUtil;
 
 @RestController
 public class SkillReportController {
@@ -25,14 +26,11 @@ public class SkillReportController {
     private VacancyService vacancyService;
 
     @GetMapping("/test")
-    public SkillReport test(@RequestParam("professionName") String professionName, @RequestParam("city") String city,
-                            @RequestParam("selection") Selection selection) {
+    public SkillReportTo test(@RequestParam("professionName") String professionName, @RequestParam("city") String city,
+                              @RequestParam("selection") Selection selection) {
         log.info(professionName);
-        return skillReportService.getSkillReportForToday(professionName, city, selection);
+        SkillReport skillReport = skillReportService.getSkillReportForToday(professionName, city, selection);
+        return SkillReportUtil.createTo(skillReport);
     }
 
-    @GetMapping("/notfound/{id}")
-    public void testNotFound(@PathVariable("id") String id) {
-        vacancyService.getKeySkills(id);
-    }
 }

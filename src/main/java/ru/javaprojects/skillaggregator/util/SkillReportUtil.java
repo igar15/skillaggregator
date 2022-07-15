@@ -1,6 +1,7 @@
 package ru.javaprojects.skillaggregator.util;
 
 
+import org.springframework.util.StringUtils;
 import ru.javaprojects.skillaggregator.model.SkillReport;
 import ru.javaprojects.skillaggregator.to.SkillReportTo;
 
@@ -17,8 +18,8 @@ public class SkillReportUtil {
     public static SkillReportTo createTo(SkillReport skillReport) {
         Map<String, Integer> skillStatistic =
                 createSkillStatistic(skillReport.getSkillCounter(), skillReport.getAnalyzedVacanciesAmount());
-        return new SkillReportTo(skillReport.getProfessionName(), skillReport.getCity(), skillReport.getDate(),
-                skillReport.getAnalyzedVacanciesAmount(), skillReport.getSelection(), skillStatistic);
+        return new SkillReportTo(format(skillReport.getProfessionName()), format(skillReport.getCity()), skillReport.getDate(),
+                skillReport.getAnalyzedVacanciesAmount(), skillReport.getSelection().getDescription(), skillStatistic);
     }
 
     private static Map<String, Integer> createSkillStatistic(Map<String, Integer> skillCounter, int analyzedVacanciesAmount) {
@@ -27,5 +28,9 @@ public class SkillReportUtil {
         return skillCounter.entrySet().stream()
                 .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Entry::getKey, statisticMapper, (k, v) -> v, LinkedHashMap::new));
+    }
+
+    private static String format(String word) {
+        return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
     }
 }
