@@ -49,9 +49,9 @@ public class SkillReportService {
         if (vacancyIds.isEmpty()) {
             throw new VacanciesNotFoundException(String.format("Not found vacancies for profession %s in city %s", professionName, city));
         }
-        Map<String, Long> skillCounter = vacancyIds.stream()
+        Map<String, Integer> skillCounter = vacancyIds.stream()
                 .flatMap(vacancyId -> vacancyService.getKeySkills(vacancyId).stream())
-                .collect(Collectors.groupingBy(keySkill -> keySkill, Collectors.counting()));
+                .collect(Collectors.groupingBy(keySkill -> keySkill, Collectors.summingInt(keySkill -> 1)));
         SkillReport skillReport = new SkillReport(professionName, city, vacancyIds.size(), skillCounter, selection);
         return saveSkillReport(skillReport);
     }

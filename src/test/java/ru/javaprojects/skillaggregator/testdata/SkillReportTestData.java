@@ -1,8 +1,10 @@
 package ru.javaprojects.skillaggregator.testdata;
 
 import ru.javaprojects.skillaggregator.model.SkillReport;
+import ru.javaprojects.skillaggregator.to.SkillReportTo;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static ru.javaprojects.skillaggregator.model.Selection.FIRST_100_VACANCIES;
@@ -21,23 +23,36 @@ public class SkillReportTestData {
     public static SkillReport managerSkillReport;
     public static final int VACANCIES_AMOUNT = 100;
     public static final int MANAGER_VACANCIES_AMOUNT = 5;
+    public static SkillReportTo javaSkillReportTo;
 
     static {
         createSkillReports();
+        createSkillReportTo();
     }
 
     private static void createSkillReports() {
-        Map<String, Long> javaSkillReportSkillCounter = Map.of("JAVA", 100L, "ENGLISH", 25L, "SPRING", 90L, "HIBERNATE", 70L,
-                "SQL", 50L, "DOCKER", 10L);
+        Map<String, Integer> javaSkillReportSkillCounter = Map.of("JAVA", 100, "ENGLISH", 25, "SPRING", 90, "HIBERNATE", 70,
+                "SQL", 50, "DOCKER", 10);
         javaSkillReport = new SkillReport(JAVA_SKILL_REPORT_ID, JAVA_PROFESSION_NAME, MOSCOW_CITY, LocalDate.now(), VACANCIES_AMOUNT,
                 javaSkillReportSkillCounter, FIRST_100_VACANCIES);
-        Map<String, Long> sellerSkillReportSkillCounter = Map.of("SALES", 80L, "POLITENESS", 70L, "ARITHMETIC", 20L);
+        Map<String, Integer> sellerSkillReportSkillCounter = Map.of("SALES", 80, "POLITENESS", 70, "ARITHMETIC", 20);
         sellerSkillReport = new SkillReport(SELLER_SKILL_REPORT_ID, SELLER_PROFESSION_NAME, LONDON_CITY, LocalDate.now(), VACANCIES_AMOUNT,
                 sellerSkillReportSkillCounter, FIRST_100_VACANCIES);
-        Map<String, Long> managerSkillReportSkillCounter = Map.of("LEADING", 5L, "SALES", 4L, "MANAGEMENT", 4L,
-                "ENGLISH", 2L, "GERMAN", 1L, "MATH", 1L);
+        Map<String, Integer> managerSkillReportSkillCounter = Map.of("LEADING", 5, "SALES", 4, "MANAGEMENT", 4,
+                "ENGLISH", 2, "GERMAN", 1, "MATH", 1);
         managerSkillReport = new SkillReport(MANAGER_PROFESSION_NAME, MOSCOW_CITY, MANAGER_VACANCIES_AMOUNT,
                 managerSkillReportSkillCounter, FIRST_100_VACANCIES);
+    }
 
+    private static void createSkillReportTo() {
+        Map<String, Integer> javaSkillStatistic = new LinkedHashMap<>();
+        javaSkillStatistic.put("JAVA", 100);
+        javaSkillStatistic.put("SPRING", 90);
+        javaSkillStatistic.put("HIBERNATE", 70);
+        javaSkillStatistic.put("SQL", 50);
+        javaSkillStatistic.put("ENGLISH", 25);
+        javaSkillStatistic.put("DOCKER", 10);
+        javaSkillReportTo = new SkillReportTo(JAVA_PROFESSION_NAME, MOSCOW_CITY, LocalDate.now(), VACANCIES_AMOUNT,
+                FIRST_100_VACANCIES, javaSkillStatistic);
     }
 }

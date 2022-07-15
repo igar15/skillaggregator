@@ -40,7 +40,7 @@ public class SkillReport implements Serializable {
             joinColumns = {@JoinColumn(name = "skill_report_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "skill_name")
     @Column(name = "skill_counter")
-    private Map<String, Long> skillCounter;
+    private Map<String, Integer> skillCounter;
 
     @Column(name = "selection")
     @Enumerated(EnumType.STRING)
@@ -49,13 +49,13 @@ public class SkillReport implements Serializable {
     public SkillReport() {
     }
 
-    public SkillReport(String professionName, String city, int analyzedVacanciesAmount, Map<String, Long> skillCounter,
+    public SkillReport(String professionName, String city, int analyzedVacanciesAmount, Map<String, Integer> skillCounter,
                        Selection selection) {
         this(null, professionName, city, LocalDate.now(), analyzedVacanciesAmount, skillCounter, selection);
     }
 
     public SkillReport(Integer id, String professionName, String city, LocalDate date, int analyzedVacanciesAmount,
-                       Map<String, Long> skillCounter, Selection selection) {
+                       Map<String, Integer> skillCounter, Selection selection) {
         this.id = id;
         this.professionName = professionName;
         this.city = city;
@@ -105,11 +105,11 @@ public class SkillReport implements Serializable {
         this.analyzedVacanciesAmount = vacanciesAmount;
     }
 
-    public Map<String, Long> getSkillCounter() {
+    public Map<String, Integer> getSkillCounter() {
         return skillCounter;
     }
 
-    public void setSkillCounter(Map<String, Long> skillCounter) {
+    public void setSkillCounter(Map<String, Integer> skillCounter) {
         this.skillCounter = skillCounter;
     }
 
