@@ -21,7 +21,7 @@ public class SkillReportController {
     @GetMapping("/test")
     public void test(@RequestParam("professionName") String professionName, @RequestParam("city") String city,
                      @RequestParam("selection") Selection selection) {
-        skillReportService.getSkillReport(professionName, city, selection);
+        skillReportService.getSkillReportForToday(professionName, city, selection);
     }
 
     @GetMapping("/notfound/{id}")

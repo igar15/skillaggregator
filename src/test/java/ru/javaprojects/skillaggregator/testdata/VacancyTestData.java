@@ -73,4 +73,11 @@ public class VacancyTestData {
             "            \"id\": \"" + VACANCY_5_ID + "\"\n" +
             "        }]\n" +
             "}";
+    public static final String VACANCIES_PAGE_WITHOUT_VACANCIES =
+            "{ \"found\": \"0\"," +
+            "  \"pages\": \"1\"," +
+            "  \"page\": \"0\"," +
+            "  \"per_page\": \"100\"," +
+            "  \"items\": []\n" +
+            "}";
 }

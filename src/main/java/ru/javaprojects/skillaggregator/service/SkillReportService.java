@@ -17,12 +17,13 @@ public class SkillReportService {
     private VacancyService vacancyService;
 
 
-    public void getSkillReport(String professionName, String city, Selection selection) {
+    public void getSkillReportForToday(String professionName, String city, Selection selection) {
         checkParamsOnNull(professionName, city, selection);
-        //TODO
-        //check report for today in database
+        professionName = professionName.toUpperCase();
+        city = city.toUpperCase();
 
-        //if report not found
+
+
         createSkillReport(professionName, city, selection);
     }
 
@@ -34,6 +35,9 @@ public class SkillReportService {
 
     private void createSkillReport(String professionName, String city, Selection selection) {
         Set<String> vacancyIds = vacancyService.getVacancyIds(professionName, city, selection.getPageAmount());
+        if (vacancyIds.isEmpty()) {
+            throw new VacanciesNotFoundException(String.format("Not found vacancies for profession %s in city %s", professionName, city));
+        }
         Map<String, Long> skillCounter = vacancyIds.stream()
                 .flatMap(vacancyId -> vacancyService.getKeySkills(vacancyId).stream())
                 .collect(Collectors.groupingBy(keySkill -> keySkill, Collectors.counting()));

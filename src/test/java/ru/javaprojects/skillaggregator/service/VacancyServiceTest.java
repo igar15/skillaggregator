@@ -102,6 +102,14 @@ class VacancyServiceTest {
     }
 
     @Test
+    void getVacancyIdsWhenVacanciesNotFound() {
+        prepareMockServerForOkResponse(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE), VACANCIES_PAGE_WITHOUT_VACANCIES);
+        Set<String> vacancyIds = vacancyService.getVacancyIds(PROFESSION_NAME, CITY, FIVE_PAGE_AMOUNT);
+        mockServer.verify();
+        assertEquals(Collections.emptySet(), vacancyIds);
+    }
+
+    @Test
     void getVacancyIdsWhenServerUnavailable() {
         mockServer.expect(ExpectedCount.once(),
                 MockRestRequestMatchers.requestTo(String.format(VACANCIES_PAGE_URL_PATTERN, PROFESSION_NAME, CITY, FIRST_PAGE)))
