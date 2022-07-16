@@ -59,8 +59,8 @@ class SkillReportServiceTest {
     void getSkillReportWhenNoVacanciesFound() {
         Mockito.when(vacancyService.getVacancyIds(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, ONE_PAGE))
                 .thenReturn(Collections.emptySet());
-        assertThrows(VacanciesNotFoundException.class,
-                () -> service.getSkillReportForToday(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, FIRST_100));
+        SkillReport skillReport = service.getSkillReportForToday(NOT_EXISTED_PROFESSION_NAME, MOSCOW_CITY, FIRST_100);
+        assertThat(skillReport).usingRecursiveComparison().isEqualTo(emptySkillReport);
     }
 
     @Test

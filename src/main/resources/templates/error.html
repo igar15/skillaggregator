@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head-fragment"></head>
+
+    <body class="d-flex flex-column min-vh-100">
+        <div class="jumbotron">
+            <div class="container">
+                <h5><a th:href="@{/}">Home</a></h5>
+                <hr>
+                <br>
+                <h2 class="text-danger mb-3">An error occurred while processing the request!</h2>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer-fragment"></div>
+    </body>
+</html>

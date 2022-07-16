@@ -47,13 +47,17 @@ public class SkillReportService {
     private SkillReport createSkillReport(String professionName, String city, Selection selection) {
         Set<String> vacancyIds = vacancyService.getVacancyIds(professionName, city, selection.getPageAmount());
         if (vacancyIds.isEmpty()) {
-            throw new VacanciesNotFoundException(String.format("Not found vacancies for profession %s in city %s", professionName, city));
+            return emptySkillReport();
         }
         Map<String, Integer> skillCounter = vacancyIds.stream()
                 .flatMap(vacancyId -> vacancyService.getKeySkills(vacancyId).stream())
                 .collect(Collectors.groupingBy(keySkill -> keySkill, Collectors.summingInt(keySkill -> 1)));
         SkillReport skillReport = new SkillReport(professionName, city, vacancyIds.size(), skillCounter, selection);
         return saveSkillReport(skillReport);
+    }
+
+    private SkillReport emptySkillReport() {
+        return new SkillReport();
     }
 
     private SkillReport saveSkillReport(SkillReport skillReport) {

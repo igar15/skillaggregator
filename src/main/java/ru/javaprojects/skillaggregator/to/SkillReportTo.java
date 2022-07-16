@@ -3,6 +3,7 @@ package ru.javaprojects.skillaggregator.to;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
 public class SkillReportTo {
     private String professionName;
@@ -68,5 +69,23 @@ public class SkillReportTo {
 
     public void setSkillStatistic(Map<String, Integer> skillStatistic) {
         this.skillStatistic = skillStatistic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SkillReportTo that = (SkillReportTo) o;
+        return analyzedVacanciesAmount == that.analyzedVacanciesAmount &&
+                Objects.equals(professionName, that.professionName) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(selection, that.selection) &&
+                Objects.equals(skillStatistic, that.skillStatistic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(professionName, city, date, analyzedVacanciesAmount, selection, skillStatistic);
     }
 }

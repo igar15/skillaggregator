@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head-fragment"></head>
+
+    <body class="d-flex flex-column min-vh-100">
+        <div class="jumbotron pt-4">
+            <div class="container">
+                <h5><a th:href="@{/}">Home</a></h5>
+                <hr>
+                <br>
+                <h4 th:text="'Profession name: ' + ${skillReportTo.professionName}"></h4>
+                <h4 th:text="'City: ' + ${skillReportTo.city}"></h4>
+                <h4 th:text="'Selection: ' + ${skillReportTo.selection}"></h4>
+                <h4 th:text="'Processed date: ' + ${skillReportTo.date}"></h4>
+                <h4 th:text="'Analyzed vacancies amount: ' + ${skillReportTo.analyzedVacanciesAmount}"></h4>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3 class="text-danger" align="center" th:if="${skillReportTo.skillStatistic.size() == 0}">
+                Analyzed vacancies do not have key skills
+            </h3>
+            <div th:if="${skillReportTo.skillStatistic.size() > 0}">
+                <h3 align="center">Key Skills</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr align="center">
+                        <th><h5>Technology</h5></th>
+                        <th><h5>Percentage of vacancies where required</h5></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="entry : ${skillReportTo.skillStatistic}" align="center">
+                            <td th:text="${entry.key}"></td>
+                            <td th:text="${entry.value}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer-fragment"></div>
+    </body>
+</html>

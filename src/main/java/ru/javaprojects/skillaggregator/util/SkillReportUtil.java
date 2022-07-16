@@ -31,6 +31,10 @@ public class SkillReportUtil {
     }
 
     private static String format(String word) {
-        return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
+        if (word.length() > 1) {
+            return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
+        } else {
+            return word.toUpperCase();
+        }
     }
 }

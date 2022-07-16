@@ -21,9 +21,14 @@ public class SkillReportTestData {
     public static SkillReport javaSkillReport;
     public static SkillReport sellerSkillReport;
     public static SkillReport managerSkillReport;
+    public static SkillReport emptySkillReport = new SkillReport();
     public static final int VACANCIES_AMOUNT = 100;
     public static final int MANAGER_VACANCIES_AMOUNT = 5;
     public static SkillReportTo javaSkillReportTo;
+
+    public static final String PROFESSION_NAME_PARAM = "professionName";
+    public static final String CITY_PARAM = "city";
+    public static final String SELECTION_PARAM = "selection";
 
     static {
         createSkillReports();

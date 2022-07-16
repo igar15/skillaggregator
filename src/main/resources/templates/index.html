@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head-fragment"></head>
+
+    <body class="d-flex flex-column min-vh-100">
+        <div class="jumbotron">
+            <div class="container">
+                <p class="h3 p-2 bg-secondary text-white text-center">
+                    &emsp;Here you can find out what key skills you need to have for the specified profession.</br>
+                    The query result will contain a list of key skills and the percentage of vacancies that require their knowledge.
+                </p>
+                <p class="h4 mb-3 mt-4">
+                    &emsp;For information on key skills, follow these steps*:
+                </p>
+                <h5>&emsp;1. Enter the name of the profession you are interested in.</h5>
+                <h5>&emsp;2. Enter the name of the city in which to search for vacancies**.</h5>
+                <h5>&emsp;3. Select the number of vacancies for analysis (the waiting time depends significantly on this parameter).</h5>
+                <h5>&emsp;4. Click the "Request" button and wait for the result.</h5>
+                <p class="font-italic mt-3">
+                    &emsp;* Please note that vacancies are taken from the <a href="https://hh.ru">Head Hunters Russia</a> portal,
+                    so (if possible) enter the name of the profession and city in Russian:</br>
+                    &emsp;** If you do not specify a city, the search will be performed in all cities of Russia.
+                </p>
+            </div>
+        </div>
+
+        <div class="container d-flex justify-content-center">
+            <form th:action="@{/makeSkillReport}" method="get" class="text-center">
+                <div class="form-group">
+                    <label for="professionName" class="col-form-label">Profession name:</label>
+                    <input type="text" class="form-control" id="professionName" th:name="professionName" required>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="col-form-label">Vacancy city:</label>
+                    <input type="text" class="form-control" id="city" th:name="city">
+                </div>
+                <div class="form-group">
+                    <label for="selection" class="col-form-label">Selection:</label>
+                    <select th:name="selection" class="form-control" id="selection">
+                        <option th:value="FIRST_100" selected>First 100 (~ 10 sec wait)</option>
+                        <option th:value="FIRST_500">First 500 (~ 50 sec wait)</option>
+                        <option th:value="FIRST_2000">First 2000 (~ 3 min wait)</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Get Skill Report</button>
+            </form>
+        </div>
+
+        <div th:replace="fragments/footer-fragment"></div>
+    </body>
+</html>
