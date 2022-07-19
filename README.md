@@ -1,5 +1,5 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d859b5dbf86349b48c4f7eabea1acfc0)](https://www.codacy.com/gh/igar15/skillaggregator/dashboard)
-[![Build Status](https://app.travis-ci.com/igar15/skillaggregator.svg?branch=master)](https://travis-ci.com/github/igar15/skillaggregator)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d859b5dbf86349b48c4f7eabea1acfc0)](https://www.codacy.com/gh/ishlyakhtenkov/skillaggregator/dashboard)
+[![Build Status](https://app.travis-ci.com/ishlyakhtenkov/skillaggregator.svg?branch=master)](https://travis-ci.com/github/ishlyakhtenkov/skillaggregator)
 
 Skill Aggregator project (New)
 =================================
