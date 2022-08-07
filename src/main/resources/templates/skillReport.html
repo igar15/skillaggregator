@@ -21,18 +21,18 @@
                 Analyzed vacancies do not have key skills
             </h3>
             <div th:if="${skillReportTo.skillStatistic.size() > 0}">
-                <h3 align="center">Key Skills</h3>
+                <h3 class="text-center">Key Skills</h3>
                 <table class="table table-striped">
                     <thead>
-                    <tr align="center">
-                        <th><h5>Technology</h5></th>
-                        <th><h5>Percentage of vacancies where required</h5></th>
+                    <tr>
+                        <th class="text-center align-middle"><h5>Technology</h5></th>
+                        <th class="text-center align-middle"><h5>Percentage of vacancies where required</h5></th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="entry : ${skillReportTo.skillStatistic}" align="center">
-                            <td th:text="${entry.key}"></td>
-                            <td th:text="${entry.value}"></td>
+                        <tr th:each="entry : ${skillReportTo.skillStatistic}">
+                            <td class="text-center align-middle" th:text="${entry.key}"></td>
+                            <td class="text-center align-middle" th:text="${entry.value}"></td>
                         </tr>
                     </tbody>
                 </table>
